@@ -14,7 +14,6 @@ import static org.mockito.Mockito.when;
 public class BurgerTest {
     @Mock
     Bun bunMock = mock(Bun.class);
-
     @Mock
     Ingredient ingredientMock = mock(Ingredient.class);
     @Mock
@@ -22,9 +21,9 @@ public class BurgerTest {
 
     @Test
     public void setBunsTest() {
-        Burger burger1 = new Burger();
-        burger1.setBuns(bunMock);
-        assertEquals(bunMock, burger1.bun);
+        Burger burger = new Burger();
+        burger.setBuns(bunMock);
+        assertEquals(bunMock, burger.bun);
     }
 
     @Test
@@ -52,6 +51,8 @@ public class BurgerTest {
         burger.moveIngredient(1, 0);
         System.out.println(Burger.ingredients.get(0));
         assertEquals(ingredientMockOne, Burger.ingredients.get(0));
+        burger.removeIngredient(0);
+        burger.removeIngredient(0);
     }
 
     @Test
@@ -63,6 +64,7 @@ public class BurgerTest {
         burger.setBuns(bunMock);
         burger.addIngredient(ingredientMock);
         assertEquals(expectedPrice, burger.getPrice(), 0);
+        burger.removeIngredient(0);
     }
 
     @Test
@@ -80,5 +82,6 @@ public class BurgerTest {
         System.out.println(expected);
         System.out.println(reciept);
         assertTrue(expected.contains("= filling ingredient ="));
+        burger.removeIngredient(0);
     }
 }
