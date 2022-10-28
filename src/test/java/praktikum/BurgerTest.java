@@ -15,6 +15,8 @@ public class BurgerTest {
 
     @Mock
     Ingredient ingredientMock = mock(Ingredient.class);
+    @Mock
+    Ingredient ingredientMockOne = mock(Ingredient.class);
 
     @Test
     public void setBunsTest() {
@@ -34,8 +36,7 @@ public class BurgerTest {
     @Test
     public void removeIngredient() {
         Burger burger = new Burger();
-        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        burger.addIngredient(ingredient);
+        burger.addIngredient(ingredientMock);
         assertEquals(1, Burger.ingredients.size());
         burger.removeIngredient(0);
         assertEquals(0, Burger.ingredients.size());
@@ -44,14 +45,11 @@ public class BurgerTest {
     @Test
     public void moveIngredient() {
         Burger burger = new Burger();
-        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "hot sauce", 100);
-        Ingredient ingredientOne = new Ingredient(IngredientType.FILLING, "cutlet", 100);
-        burger.addIngredient(ingredient);
-        burger.addIngredient(ingredient);
-        burger.addIngredient(ingredientOne);
-        burger.moveIngredient(2, 0);
-        System.out.println(Burger.ingredients.get(0).name);
-        assertEquals("cutlet", Burger.ingredients.get(0).name);
+        burger.addIngredient(ingredientMock);
+        burger.addIngredient(ingredientMockOne);
+        burger.moveIngredient(1, 0);
+        System.out.println(Burger.ingredients.get(0));
+        assertEquals(ingredientMockOne, Burger.ingredients.get(0));
     }
 
     @Test
@@ -62,7 +60,7 @@ public class BurgerTest {
         when(ingredientMock.getPrice()).thenReturn(200F);
         burger.setBuns(bunMock);
         burger.addIngredient(ingredientMock);
-        assertEquals(expectedPrice, burger.getPrice(), 300);
+        assertEquals(expectedPrice, burger.getPrice(), 0);
     }
 
     @Test
